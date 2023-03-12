@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
+import "express-async-errors";
 
 const prisma = new PrismaClient();
 
