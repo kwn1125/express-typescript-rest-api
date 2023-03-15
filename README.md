@@ -38,6 +38,12 @@ npm install
 npm run prisma:deploy
 ```
 
+- Generate Prisma Client.
+
+```
+npm run prisma:generate
+```
+
 - Launch the application.
 
 ```
