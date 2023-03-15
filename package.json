@@ -6,7 +6,8 @@
   "author": "kwn <kwn1125dev@gmail.com>",
   "scripts": {
     "start": "tsc && node dist/server.js",
-    "prisma:deploy": "prisma migrate deploy"
+    "prisma:deploy": "prisma migrate deploy",
+    "prisma:generate": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^4.10.1",
