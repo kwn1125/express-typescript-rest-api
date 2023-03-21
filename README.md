@@ -1,4 +1,6 @@
-# REST API built with Express and TypeScript
+# REST API using Node.js, Express and Typescript
+
+This is a template for me to create a REST API with Node.js, Express and TypeScript.
 
 ## Requirements
 
@@ -18,7 +20,7 @@ The recommended extensions for Visual Studio Code are listed in [.vscode/extensi
 - Clone this repository.
 
 ```
-git clone https://github.com/kwn1125/express-typescript-rest-api.git <project_directory>
+git clone https://github.com/kwn1125/node-express-typescript-rest-api.git <project_directory>
 ```
 
 - Install dependencies.
