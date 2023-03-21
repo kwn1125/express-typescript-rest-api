@@ -11,10 +11,7 @@ Node.js is required to run this application. Please install Volta to automatical
 
 - [Visual Studio Code](https://code.visualstudio.com/)
 
-### Extensions for Visual Studio Code
-
-- [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-- [Prisma](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma)
+The recommended extensions for Visual Studio Code are listed in [.vscode/extensions.json](.vscode/extensions.json).
 
 ## Getting Started
 
