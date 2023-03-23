@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "../clients/prisma";
 import "express-async-errors";
-
-const prisma = new PrismaClient();
 
 export const getUsers = async (_: Request, res: Response) => {
   const users = await prisma.users.findMany();
