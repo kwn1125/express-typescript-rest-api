@@ -1,6 +1,6 @@
-# REST API using Node.js, Express and Typescript
+# REST API using Node.js, Express, and Typescript
 
-This is a template for me to create a REST API with Node.js, Express and TypeScript.
+Sample REST API developed using Node.js, Express, and TypeScript.
 
 ## Requirements
 
