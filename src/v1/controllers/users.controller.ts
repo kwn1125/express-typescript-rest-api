@@ -1,42 +1,33 @@
 import { Request, Response } from "express";
-import { prisma } from "../clients/prisma";
+import * as usersService from "../services/users.service";
 import "express-async-errors";
 
 export const getUsers = async (_: Request, res: Response) => {
-  const users = await prisma.users.findMany();
+  const users = await usersService.getUsers();
   res.status(200).json(users);
 };
 
 export const getUserById = async (req: Request, res: Response) => {
   const userId = Number(req.params.id);
-  const user = await prisma.users.findUnique({
-    where: { id: userId },
-  });
+  const user = await usersService.getUserById(userId);
   res.status(200).json(user);
 };
 
 export const createUser = async (req: Request, res: Response) => {
   const { email, name } = req.body;
-  const user = await prisma.users.create({
-    data: { email, name },
-  });
+  const user = await usersService.createUser(email, name);
   res.status(200).json(user);
 };
 
 export const updateUser = async (req: Request, res: Response) => {
   const userId = Number(req.params.id);
   const { email, name } = req.body;
-  const user = await prisma.users.update({
-    where: { id: userId },
-    data: { email, name },
-  });
+  const user = await usersService.updateUser(userId, email, name);
   res.status(200).json(user);
 };
 
 export const deleteUser = async (req: Request, res: Response) => {
   const userId = Number(req.params.id);
-  const user = await prisma.users.delete({
-    where: { id: userId },
-  });
+  const user = await usersService.deleteUser(userId);
   res.status(200).json(user);
 };
