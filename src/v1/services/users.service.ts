@@ -16,11 +16,7 @@ export const createUser = async (email: string, name: string) => {
   });
 };
 
-export const updateUser = async (
-  userId: number,
-  email: string,
-  name: string
-) => {
+export const updateUser = async (userId: number, email: string, name: string) => {
   return await prisma.users.update({
     where: { id: userId },
     data: { email, name },
