@@ -28,6 +28,6 @@ export const updateUser = async (req: Request, res: Response) => {
 
 export const deleteUser = async (req: Request, res: Response) => {
   const userId = Number(req.params.id);
-  const user = await usersService.deleteUser(userId);
-  res.status(200).json(user);
+  await usersService.deleteUser(userId);
+  res.status(204).send();
 };
