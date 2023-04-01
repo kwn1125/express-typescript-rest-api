@@ -1,3 +1,4 @@
 dist/
+logs/
 *.md
 package-lock.json
