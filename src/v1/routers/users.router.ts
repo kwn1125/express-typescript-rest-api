@@ -7,7 +7,7 @@ const usersRouter = Router();
 usersRouter.route("/").get(usersController.getUsers);
 usersRouter.route("/:id").get(usersController.getUserById);
 usersRouter.route("/").post(validation(CreateUserValidator), usersController.createUser);
-usersRouter.route("/:id").patch(validation(UpdateUserValidator), usersController.updateUser);
+usersRouter.route("/:id").patch(validation(UpdateUserValidator, true), usersController.updateUser);
 usersRouter.route("/:id").delete(usersController.deleteUser);
 
 export { usersRouter };
