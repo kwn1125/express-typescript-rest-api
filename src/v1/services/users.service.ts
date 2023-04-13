@@ -17,9 +17,13 @@ export const createUser = async (email: string, name: string) => {
 };
 
 export const updateUser = async (userId: number, email: string, name: string) => {
+  const data = {
+    email: email ? email : undefined,
+    name: name ? name : undefined,
+  };
   return await prisma.users.update({
     where: { id: userId },
-    data: { email, name },
+    data,
   });
 };
 
