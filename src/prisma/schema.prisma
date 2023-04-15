@@ -11,6 +11,7 @@ model Users {
   id         Int      @id @default(autoincrement()) @db.UnsignedInt
   email      String   @unique @db.VarChar(255)
   name       String   @db.VarChar(255)
+  password   String   @db.VarChar(60)
   created_at DateTime @default(dbgenerated("NOW()")) @db.DateTime
   updated_at DateTime @default(dbgenerated("NOW() ON UPDATE NOW()")) @db.DateTime
 }

@@ -14,15 +14,15 @@ export const getUserById = async (req: Request, res: Response) => {
 };
 
 export const createUser = async (req: Request, res: Response) => {
-  const { email, name } = req.body;
-  const user = await usersService.createUser(email, name);
+  const { email, name, password } = req.body;
+  const user = await usersService.createUser(email, name, password);
   res.status(201).json(user);
 };
 
 export const updateUser = async (req: Request, res: Response) => {
   const userId = Number(req.params.id);
-  const { email, name } = req.body;
-  const user = await usersService.updateUser(userId, email, name);
+  const { email, name, password } = req.body;
+  const user = await usersService.updateUser(userId, email, name, password);
   res.status(200).json(user);
 };
 
