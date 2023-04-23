@@ -30,7 +30,7 @@ cd <project_directory>
 npm install
 ```
 
-- Rename `.env.sample` to `.env` and update DATABASE_URL to your database connection URL.
+- Rename `.env.sample` to `.env` and update the values.
 - Apply the migration to your database.
 
 ```
