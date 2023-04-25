@@ -7,6 +7,13 @@ export const getUsers = async () => {
   });
 };
 
+export const getCurrentUser = async (currentUserId: number) => {
+  return await prisma.users.findUnique({
+    where: { id: currentUserId },
+    select: { id: true, email: true, name: true, created_at: true, updated_at: true },
+  });
+};
+
 export const getUserById = async (userId: number) => {
   return await prisma.users.findUnique({
     where: { id: userId },

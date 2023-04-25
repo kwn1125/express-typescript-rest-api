@@ -5,6 +5,7 @@ import { CreateUserValidator, UpdateUserValidator } from "../validators/users.va
 
 const usersRouter = Router();
 usersRouter.route("/").get(usersController.getUsers);
+usersRouter.route("/me").get(usersController.getCurrentUser);
 usersRouter.route("/:id").get(usersController.getUserById);
 usersRouter.route("/").post(validation(CreateUserValidator), usersController.createUser);
 usersRouter.route("/:id").patch(validation(UpdateUserValidator, true), usersController.updateUser);

@@ -7,6 +7,11 @@ export const getUsers = async (_: Request, res: Response) => {
   res.status(200).json(users);
 };
 
+export const getCurrentUser = async (req: Request, res: Response) => {
+  const user = await usersService.getCurrentUser(req.body.currentUserId);
+  res.status(200).json(user);
+};
+
 export const getUserById = async (req: Request, res: Response) => {
   const userId = Number(req.params.id);
   const user = await usersService.getUserById(userId);
