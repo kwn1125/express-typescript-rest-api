@@ -1,5 +1,6 @@
 import { prisma } from "../clients/prisma";
 import { hashPassword } from "../utils/hash";
+import { generateAccessToken, generateRefreshToken } from "../utils/jwt";
 
 export const getUsers = async () => {
   return await prisma.users.findMany({
@@ -23,10 +24,21 @@ export const getUserById = async (userId: number) => {
 
 export const createUser = async (email: string, name: string, password: string) => {
   password = await hashPassword(password);
-  return await prisma.users.create({
+  const user = await prisma.users.create({
     data: { email, name, password },
     select: { id: true, email: true, name: true, created_at: true, updated_at: true },
   });
+  const accessToken = generateAccessToken(user.id);
+  const refreshToken = generateRefreshToken();
+  return {
+    access_token: accessToken,
+    refresh_token: refreshToken,
+    id: user.id,
+    email: user.email,
+    name: user.name,
+    created_at: user.created_at,
+    updated_at: user.updated_at,
+  };
 };
 
 export const updateUser = async (userId: number, email: string, name: string, password: string) => {
