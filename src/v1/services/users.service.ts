@@ -30,15 +30,7 @@ export const createUser = async (email: string, name: string, password: string) 
   });
   const accessToken = generateAccessToken(user.id);
   const refreshToken = generateRefreshToken();
-  return {
-    access_token: accessToken,
-    refresh_token: refreshToken,
-    id: user.id,
-    email: user.email,
-    name: user.name,
-    created_at: user.created_at,
-    updated_at: user.updated_at,
-  };
+  return { access_token: accessToken, refresh_token: refreshToken };
 };
 
 export const updateUser = async (userId: number, email: string, name: string, password: string) => {
