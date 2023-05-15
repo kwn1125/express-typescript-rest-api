@@ -12,7 +12,7 @@ export const validation = <T extends object>(
       skipMissingProperties,
     });
     if (validationErrors.length > 0) {
-      next(new BadRequestError(createValidationMessages(validationErrors)));
+      throw new BadRequestError(createValidationMessages(validationErrors));
     } else {
       next();
     }
