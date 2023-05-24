@@ -7,8 +7,8 @@ export const getUsers = async (_: Request, res: Response) => {
   res.status(200).json(users);
 };
 
-export const getCurrentUser = async (req: Request, res: Response) => {
-  const user = await usersService.getCurrentUser(req.body.currentUserId);
+export const getCurrentUser = async (_: Request, res: Response) => {
+  const user = await usersService.getCurrentUser(res.locals.currentUserId);
   res.status(200).json(user);
 };
 
