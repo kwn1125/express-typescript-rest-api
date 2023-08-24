@@ -7,8 +7,6 @@ import {
   updateUser,
   deleteUser,
 } from "../controllers/users.controller";
-import { validation } from "../middlewares/validation.middleware";
-import { CreateUserValidator, UpdateUserValidator } from "../validators/users.validator";
 import { auth } from "../middlewares/auth.middleware";
 
 const usersRouter = Router();
@@ -17,10 +15,10 @@ const usersRouter = Router();
 usersRouter.route("/").get(auth, getUsers);
 usersRouter.route("/me").get(auth, getCurrentUser);
 usersRouter.route("/:id").get(auth, getUserById);
-usersRouter.route("/:id").patch(auth, validation(UpdateUserValidator, true), updateUser);
+usersRouter.route("/:id").patch(auth, updateUser);
 usersRouter.route("/:id").delete(auth, deleteUser);
 
 // auth not required
-usersRouter.route("/").post(validation(CreateUserValidator), createUser);
+usersRouter.route("/").post(createUser);
 
 export { usersRouter };
