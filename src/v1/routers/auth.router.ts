@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { generateToken } from "../controllers/auth.controller";
-import { validation } from "../middlewares/validation.middleware";
-import { TokenValidator } from "../validators/auth.validator";
+import { validate } from "../middlewares/validation.middleware";
+import { generateTokenSchema } from "../schemas/auth.schema";
 
 const authRouter = Router();
-authRouter.route("/token").post(validation(TokenValidator), generateToken);
+authRouter.route("/token").post(validate(generateTokenSchema), generateToken);
 
 export { authRouter };

@@ -1,31 +1,25 @@
-import { validate, ValidationError } from "class-validator";
-import { plainToInstance } from "class-transformer";
 import { Request, Response, NextFunction } from "express";
+import { AnyZodObject, ZodIssue } from "zod";
 import { BadRequestError } from "../errors/BadRequestError";
 
-export const validation = <T extends object>(
-  validator: new () => T,
-  skipMissingProperties = false
-) => {
-  return async (req: Request, _: Response, next: NextFunction) => {
-    const validationErrors = await validate(plainToInstance(validator, req.body), {
-      skipMissingProperties,
+export const validate = (schema: AnyZodObject) => {
+  return (req: Request, _: Response, next: NextFunction) => {
+    const validationResult = schema.safeParse({
+      params: req.params,
+      query: req.query,
+      body: req.body,
     });
-    if (validationErrors.length > 0) {
-      throw new BadRequestError(createValidationMessages(validationErrors));
-    } else {
+    if (validationResult.success) {
       next();
+    } else {
+      throw new BadRequestError(createErrorMessages(validationResult.error.issues));
     }
   };
 };
 
-const createValidationMessages = (validationErrors: ValidationError[]) => {
-  return validationErrors
-    .map((error: ValidationError) => {
-      if (error.constraints) {
-        return Object.values(error.constraints);
-      }
-      return error.property + " is invalid";
-    })
-    .flat();
+const createErrorMessages = (zodIssues: ZodIssue[]) => {
+  return zodIssues.map((zodIssue: ZodIssue) => {
+    console.log(zodIssue);
+    return zodIssue.path[1] + ": " + zodIssue.message;
+  });
 };
