@@ -2,29 +2,8 @@ import { UnauthorizedError } from "../errors/UnauthorizedError";
 import { prisma } from "../clients/prisma";
 import { comparePassword } from "../utils/hash";
 import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from "../utils/jwt";
-import { authActions } from "../consts/authActions";
-import { InternalServerError } from "../errors/InternalServerError";
 
-export const generateToken = async (
-  action: string,
-  email: string,
-  password: string,
-  refreshToken: string
-) => {
-  switch (action) {
-    case authActions.signIn: {
-      return await signIn(email, password);
-    }
-    case authActions.refresh: {
-      return await refresh(refreshToken);
-    }
-    default: {
-      throw new InternalServerError();
-    }
-  }
-};
-
-const signIn = async (email: string, password: string) => {
+export const signIn = async (email: string, password: string) => {
   const user = await prisma.users.findUnique({
     where: { email },
     select: { id: true, password: true },
@@ -43,7 +22,7 @@ const signIn = async (email: string, password: string) => {
   throw new UnauthorizedError();
 };
 
-const refresh = async (refreshToken: string) => {
+export const refresh = async (refreshToken: string) => {
   const { currentUserId } = verifyRefreshToken(refreshToken);
   const newAccessToken = generateAccessToken(currentUserId);
   const newRefreshToken = generateRefreshToken();

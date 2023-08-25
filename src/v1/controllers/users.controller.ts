@@ -1,4 +1,10 @@
 import { Request, Response } from "express";
+import {
+  GetUserByIdRequest,
+  UpdateUserRequest,
+  DeleteUserRequest,
+  CreateUserRequest,
+} from "../types/request.type";
 import * as usersService from "../services/users.service";
 import "express-async-errors";
 
@@ -12,27 +18,27 @@ export const getCurrentUser = async (_: Request, res: Response) => {
   res.status(200).json(user);
 };
 
-export const getUserById = async (req: Request, res: Response) => {
-  const userId = Number(req.params.id);
-  const user = await usersService.getUserById(userId);
+export const getUserById = async (req: GetUserByIdRequest, res: Response) => {
+  const { id } = req.params;
+  const user = await usersService.getUserById(Number(id));
   res.status(200).json(user);
 };
 
-export const createUser = async (req: Request, res: Response) => {
+export const updateUser = async (req: UpdateUserRequest, res: Response) => {
+  const { id } = req.params;
+  const { email, name, password } = req.body;
+  const user = await usersService.updateUser(Number(id), email, name, password);
+  res.status(200).json(user);
+};
+
+export const deleteUser = async (req: DeleteUserRequest, res: Response) => {
+  const { id } = req.params;
+  await usersService.deleteUser(Number(id));
+  res.status(204).send();
+};
+
+export const createUser = async (req: CreateUserRequest, res: Response) => {
   const { email, name, password } = req.body;
   const user = await usersService.createUser(email, name, password);
   res.status(201).json(user);
-};
-
-export const updateUser = async (req: Request, res: Response) => {
-  const userId = Number(req.params.id);
-  const { email, name, password } = req.body;
-  const user = await usersService.updateUser(userId, email, name, password);
-  res.status(200).json(user);
-};
-
-export const deleteUser = async (req: Request, res: Response) => {
-  const userId = Number(req.params.id);
-  await usersService.deleteUser(userId);
-  res.status(204).send();
 };
